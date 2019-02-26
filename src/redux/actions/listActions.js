@@ -17,7 +17,7 @@ import {
   GET_POKEMON_SPECIES_FAIL,
   SET_POKEMON_SPECIES
 } from '../constants/listConstants'
-import { push, go } from 'connected-react-router'
+import { push } from 'connected-react-router'
 
 function setPokemons(data) {
   const pokemons = data.results.map(pokemon => {

@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react'
+import { openPokemonPage } from '../redux/actions/listActions'
+import { connect } from 'react-redux'
 
 class Pokemon extends PureComponent {
   handleClick() {
-    this.props.handleClick(this.props.pokemon)
+    this.props.openPokemonPage(this.props.pokemon)
   }
 
   render() {
-    const { pokemon, handleClick } = this.props
+    const { pokemon } = this.props
 
     return (
       <div className="pokemon">
@@ -27,4 +29,11 @@ class Pokemon extends PureComponent {
   }
 }
 
-export default Pokemon
+const mapDispatchToProps = {
+  openPokemonPage
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Pokemon)

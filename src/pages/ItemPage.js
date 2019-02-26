@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { getPokemonData, openPokemonPage } from '../redux/actions/listActions'
+import { getPokemonData } from '../redux/actions/listActions'
 import Pokemon from '../components/pokemon'
 import { Link } from 'react-router-dom'
 
@@ -43,10 +43,6 @@ class ItemPage extends PureComponent {
     return chain
   }
 
-  handlePokemonClick = pokemon => {
-    this.props.openPokemonPage(pokemon)
-  }
-
   getEvolutionForm(pokemon) {
     const evolutionChain = this.getEvolutionChainArray(pokemon)
     return evolutionChain.map(pokemon => {
@@ -54,13 +50,7 @@ class ItemPage extends PureComponent {
         .replace('https://pokeapi.co/api/v2/pokemon-species/', '')
         .replace('/', '')
 
-      return (
-        <Pokemon
-          key={pokemon.name}
-          pokemon={pokemon}
-          handleClick={this.handlePokemonClick}
-        />
-      )
+      return <Pokemon key={pokemon.name} pokemon={pokemon} />
     })
   }
 
@@ -75,14 +65,7 @@ class ItemPage extends PureComponent {
         ) : (
           <div>
             <div className="pokemon-page__header">
-              <div className="pokemon-page__image">
-                <img
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                    pokemon.id
-                  }.png`}
-                />
-                <div>{pokemon.name}</div>
-              </div>
+              <Pokemon pokemon={pokemon} />
               <div className="pokemon-page__stats">{stats}</div>
             </div>
             <div className="pokemon-page__evolution-form">
@@ -107,8 +90,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  getPokemonData,
-  openPokemonPage
+  getPokemonData
 }
 
 export default connect(
