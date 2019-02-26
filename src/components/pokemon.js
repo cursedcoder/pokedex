@@ -27,7 +27,7 @@ class Pokemon extends PureComponent {
 
   isPokemonFavourite = () => {
     const { pokemon, favouritePokemons } = this.props
-    return favouritePokemons.some(p => p.id === pokemon.id)
+    return favouritePokemons.some(p => parseInt(p.id) === parseInt(pokemon.id))
   }
 
   render() {
