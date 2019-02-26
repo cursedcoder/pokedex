@@ -15,7 +15,9 @@ import {
   GET_POKEMON_SPECIES_REQUEST,
   GET_POKEMON_SPECIES_SUCCESS,
   GET_POKEMON_SPECIES_FAIL,
-  SET_POKEMON_SPECIES
+  SET_POKEMON_SPECIES,
+  ADD_POKEMON_TO_FAVOURITES,
+  REMOVE_POKEMON_FROM_FAVOURITES
 } from '../constants/listConstants'
 import { push } from 'connected-react-router'
 
@@ -179,5 +181,17 @@ function getPokemonEvolutionForm(url) {
           payload: error.message
         })
       })
+  }
+}
+
+export function addPokemonToFavouriteList(pokemon) {
+  return dispatch => {
+    dispatch({ type: ADD_POKEMON_TO_FAVOURITES, payload: pokemon })
+  }
+}
+
+export function removePokemonFromFavouriteList(pokemon) {
+  return dispatch => {
+    dispatch({ type: REMOVE_POKEMON_FROM_FAVOURITES, payload: pokemon.id })
   }
 }

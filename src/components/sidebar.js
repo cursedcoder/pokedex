@@ -20,16 +20,19 @@ class Sidebar extends Component {
             {this.state.isSidebarHidden ? 'Show' : 'Hide'} Sidebar
           </button>
         </div>
-        <div className="sidebar">
-          {pokemons.map(pokemon => (
-            <Pokemon key={pokemon.id} pokemon={pokemon} />
-          ))}
-        </div>
+        {!this.state.isSidebarHidden && (
+          <div className="sidebar">
+            {pokemons &&
+              pokemons.map(pokemon => (
+                <Pokemon key={pokemon.id} pokemon={pokemon} />
+              ))}
+          </div>
+        )}
       </Fragment>
     )
   }
 }
 
-const mapStateToProps = state => ({ pokemons: state.favouritePokemons })
+const mapStateToProps = state => ({ pokemons: state.list.favouritePokemons })
 
-export default Sidebar
+export default connect(mapStateToProps)(Sidebar)
