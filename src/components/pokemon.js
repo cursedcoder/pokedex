@@ -1,19 +1,49 @@
 import React, { PureComponent } from 'react'
-import { openPokemonPage } from '../redux/actions/listActions'
+import {
+  openPokemonPage,
+  addPokemonToFavouriteList,
+  removePokemonFromFavouriteList
+} from '../redux/actions/listActions'
 import { connect } from 'react-redux'
+import { FaRegStar } from 'react-icons/fa'
 
 class Pokemon extends PureComponent {
   handleClick() {
     this.props.openPokemonPage(this.props.pokemon)
   }
 
+  handleFavouriteClick() {
+    const {
+      pokemon,
+      addPokemonToFavouriteList,
+      removePokemonFromFavouriteList
+    } = this.props
+    if (!this.isPokemonFavourite()) {
+      addPokemonToFavouriteList(pokemon)
+    } else {
+      removePokemonFromFavouriteList(pokemon)
+    }
+  }
+
+  isPokemonFavourite = () => {
+    const { pokemon, favouritePokemons } = this.props
+    return favouritePokemons.some(p => p.id === pokemon.id)
+  }
+
   render() {
-    const { pokemon } = this.props
+    const { pokemon, favouritePokemons } = this.props
+    const isPokemonFavourite = this.isPokemonFavourite(pokemon)
+    const style = isPokemonFavourite ? { style: { color: 'red' } } : ''
 
     return (
       <div className="pokemon">
-        <button
-          type="button"
+        <div
+          className="pokemon__favourite-icon"
+          onClick={this.handleFavouriteClick.bind(this)}
+        >
+          <FaRegStar {...style} />
+        </div>
+        <div
           className="pokemon__sprite"
           style={{
             backgroundImage: `url(${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
@@ -29,11 +59,17 @@ class Pokemon extends PureComponent {
   }
 }
 
+const mapStateToProps = state => ({
+  favouritePokemons: state.list.favouritePokemons
+})
+
 const mapDispatchToProps = {
-  openPokemonPage
+  openPokemonPage,
+  addPokemonToFavouriteList,
+  removePokemonFromFavouriteList
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Pokemon)
