@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import Pokemon from '../components/pokemon'
 import { connect } from 'react-redux'
+import cn from 'classnames'
 
 class Sidebar extends Component {
   state = {
@@ -13,6 +14,9 @@ class Sidebar extends Component {
 
   render() {
     const { pokemons } = this.props
+    const className = cn('sidebar', {
+      'sidebar--visible': !this.state.isSidebarHidden
+    })
     return (
       <Fragment>
         <div className="sidebar__button">
@@ -20,14 +24,12 @@ class Sidebar extends Component {
             {this.state.isSidebarHidden ? 'Show' : 'Hide'} Sidebar
           </button>
         </div>
-        {!this.state.isSidebarHidden && (
-          <div className="sidebar">
-            {pokemons &&
-              pokemons.map(pokemon => (
-                <Pokemon key={pokemon.id} pokemon={pokemon} />
-              ))}
-          </div>
-        )}
+        <div className={className}>
+          {pokemons &&
+            pokemons.map(pokemon => (
+              <Pokemon key={pokemon.id} pokemon={pokemon} />
+            ))}
+        </div>
       </Fragment>
     )
   }

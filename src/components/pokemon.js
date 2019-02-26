@@ -31,7 +31,7 @@ class Pokemon extends PureComponent {
   }
 
   render() {
-    const { pokemon, favouritePokemons } = this.props
+    const { pokemon } = this.props
     const isPokemonFavourite = this.isPokemonFavourite(pokemon)
     const style = isPokemonFavourite ? { style: { color: 'red' } } : ''
 
