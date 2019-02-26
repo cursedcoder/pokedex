@@ -89,6 +89,11 @@ body {
 .pokemon-page__header {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+}
+
+.pokemon-page__stats {
+  margin-left: 20px;
 }
 
 .pokemon-page__evolution-chain {
@@ -103,4 +108,10 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
 }
