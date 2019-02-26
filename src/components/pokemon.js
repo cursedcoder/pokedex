@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react'
 
 class Pokemon extends PureComponent {
+  handleClick() {
+    this.props.handleClick(this.props.pokemon)
+  }
+
   render() {
-    const { pokemon } = this.props
+    const { pokemon, handleClick } = this.props
 
     return (
       <div className="pokemon">
@@ -12,8 +16,10 @@ class Pokemon extends PureComponent {
           style={{
             backgroundImage: `url(${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
               pokemon.id
-            }.png`})`
+            }.png`})`,
+            cursor: 'pointer'
           }}
+          onClick={this.handleClick.bind(this)}
         />
         <p className="pokemon__name">{pokemon.name}</p>
       </div>

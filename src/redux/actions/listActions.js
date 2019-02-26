@@ -5,6 +5,7 @@ import {
   SET_POKEMONS,
   FILTER_POKEMONS
 } from '../constants/listConstants'
+import { push } from 'connected-react-router'
 
 function setPokemons(data) {
   const pokemons = data.results.map(pokemon => {
@@ -60,5 +61,11 @@ export function filterPokemons(searchString = '') {
       type: FILTER_POKEMONS,
       payload: displayedPokemons
     })
+  }
+}
+
+export function openPokemonPage(pokemon) {
+  return dispatch => {
+    dispatch(push(`/pokemon/${pokemon.id}`))
   }
 }

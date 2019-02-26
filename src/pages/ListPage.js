@@ -14,13 +14,17 @@ class ListPage extends Component {
     this.props.filterPokemons(event.currentTarget.value)
   }
 
+  handleClick = pokemon => {
+    this.props.openPokemonPage(pokemon)
+  }
+
   render() {
     let { displayedPokemons, isFetched, error } = this.props
 
     let pokemons = displayedPokemons.map(pokemon => {
       return (
         <li className="pokemons__item" key={pokemon.id}>
-          <Pokemon pokemon={pokemon} />
+          <Pokemon pokemon={pokemon} handleClick={this.handleClick} />
         </li>
       )
     })
@@ -53,7 +57,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   getPokemons: listActions.getPokemons,
-  filterPokemons: listActions.filterPokemons
+  filterPokemons: listActions.filterPokemons,
+  openPokemonPage: listActions.openPokemonPage
 }
 
 export default connect(
