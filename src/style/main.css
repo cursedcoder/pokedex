@@ -80,3 +80,27 @@ body {
     height: 160px;
   }
 }
+
+.pokemon-page {
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-page__header {
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-page__evolution-chain {
+  display: flex;
+}
+
+.pokemon-page__evolution-chain .pokemon {
+  margin-right: 20px;
+}
+
+.pokemon-page__back-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

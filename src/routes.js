@@ -10,7 +10,7 @@ const routes = (
   <div>
     <Switch>
       <Route exact path="/" component={ListPage} />
-      <Route exact path="/pokemon/:id" component={ItemPage} />
+      <Route exact path="/pokemon/:name" component={ItemPage} />
     </Switch>
   </div>
 )
