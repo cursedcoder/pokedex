@@ -15,7 +15,9 @@ import {
   GET_POKEMON_SPECIES_REQUEST,
   GET_POKEMON_SPECIES_SUCCESS,
   GET_POKEMON_SPECIES_FAIL,
-  SET_POKEMON_SPECIES
+  SET_POKEMON_SPECIES,
+  ADD_POKEMON_TO_FAVOURITES,
+  REMOVE_POKEMON_FROM_FAVOURITES
 } from '../constants/listConstants'
 
 const initialState = {
@@ -23,7 +25,8 @@ const initialState = {
   error: null,
   pokemons: [],
   displayedPokemons: [],
-  currentPokemon: {}
+  currentPokemon: {},
+  favouritePokemons: []
 }
 
 export default function(state = initialState, action) {
@@ -138,6 +141,20 @@ export default function(state = initialState, action) {
           ...state.currentPokemon,
           evolutionChain: action.payload
         }
+      }
+
+    case ADD_POKEMON_TO_FAVOURITES:
+      return {
+        ...state,
+        favouritePokemons: [...state.favouritePokemons, action.payload]
+      }
+
+    case REMOVE_POKEMON_FROM_FAVOURITES:
+      return {
+        ...state,
+        favouritePokemons: state.favouritePokemons.filter(
+          pokemon => pokemon.id !== action.payload
+        )
       }
     default:
       return state
