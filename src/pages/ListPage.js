@@ -53,7 +53,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   getPokemons: listActions.getPokemons,
-  filterPokemons: listActions.filterPokemons
+  filterPokemons: listActions.filterPokemons,
+  openPokemonPage: listActions.openPokemonPage
 }
 
 export default connect(
